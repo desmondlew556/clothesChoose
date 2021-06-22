@@ -1,0 +1,134 @@
+{% extends "fc_website/base.html" %}
+{% load static %}
+{% block title %}Fiiecool: air conditioning for you{% endblock %}
+
+{{ block.super }}
+
+{% block styling %}
+<style>
+.bar, .bar-block {
+  width: 100%;
+  color: var(--header_color3);
+  background-color: transparent;
+  overflow: hidden;
+}
+.nav_color1 {
+  background-color: var(--header_bg_color1);
+  color: var(--header_color2);
+}
+</style>
+{% endblock %}
+
+{{ block.super }}
+
+{% block content %}
+<div class="bg_img1 top-space7">
+</div>
+<!--Form submit status-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $("#form_msg1").ready(function(){
+    $("#form_msg1").fadeIn(0).delay(2500).fadeOut(500);
+  });
+</script>
+{% if messages %}
+<div style="display:none" class="fixed fixed_box z_2 width_100 top_box2 clearfix" id="form_msg1">
+  {% for message in messages %}
+  {% if message.tags%}
+    <div class="relative_box center_box z_2 width_80 txt_align_cent grey_outline black bg_white font_small pad_small">
+          {{ message.message }}
+    </div>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+
+<!--Navigation bar-->
+<div class="container2 side-space color_format1">
+  <!-- if there is at least 1 element, no error. -->
+  {% if section1|length %}
+  {% for section in section1 %}
+    <!-- h1 has the attributes of central class and color1 class -->
+    <h1 class="central header_style1" id="section1"> {{section.header}} </h1>
+    {% if section.description_1 or section.description_2 %}
+      <p class="message">{{section.description_1}}</p>
+      <p class="message">{{section.description_2}}</p>
+    {% else %}
+      <p class="message black">The content is unavailable as we are experiencing some technical issues. We apologise for any inconveniences</p>
+    {% endif %}
+  {% endfor %}
+  {% else %}
+    <p class="message black">The content is unavailable as we are experiencing some technical issues. We apologise for any inconveniences</p>
+  {% endif %}
+</div>
+
+<div class="container2 color_format2 clearfix">
+  {% if service_list|length %}
+  {% for service_info in service_list %}
+    <!-- h1 has the attributes of central class and color2 class -->
+    <h1 class="central header_style2" id="section2">{{service_info.header}}</h1>
+    <div class="flexible">
+      <div class="col-1st container3 left-space2 left">
+        {% if service_info.services.all|length %}
+        {% for service in service_info.services.all|dictsort:"position" %}
+          {% if service.position %}
+          <div class="text_box flexible">
+            <a href="{% url 'fiiecool:What we do' %}#{{service.description}}" class="btn btn_style btn_color message2">{{service.header}}</a>
+          </div>
+          {% endif %}
+        {% endfor %}
+        {% else %}
+          <p class="message2 black">The content is unavailable as we are experiencing some technical issues. We apologise for any inconveniences</p>
+        {% endif %}
+      </div>
+      <div class="col-2nd container3 right-space2 left hide-small hide-medium">
+        <img src="{% static 'fc_website/images/handshake1.png' %}" alt="handshake" class="image_type2 alt_text">
+      </div>
+    </div>
+  {% endfor %}
+  <!-- only display error message once if multiple sections are not dispalyed-->
+  {% elif section1|length %}
+    <p class="message black">The content is unavailable as we are experiencing some technical issues. We apologise for any inconveniences</p>
+  {% endif %}
+</div>
+
+<div class="container2 side-space color_format1">
+  {% if section3|length %}
+  {% for section in section3 %}
+    <!-- h1 has the attributes of central class and color1 class -->
+    <h1 class="central header_style1" id="section3"> {{section.header}} </h1>
+    {% if section.description_1 or section.description_2 %}
+      <p class="message">{{section.description_1}}</p>
+      <p class="message">{{section.description_2}}</p>
+    {% endif %}
+    <div class="flexible">
+      <img src="{% static 'fc_website/images/bizsafe.jpg' %}" alt="bizsafe3" class="image_type1 alt_text">
+    </div>
+  {% endfor %}
+  <!-- only display error message once if multiple sections are not dispalyed-->
+  {% elif section1|length or service_list|length %}
+    <p class="message black">The content is unavailable as we are experiencing some technical issues. We apologise for any inconveniences</p>
+  {% endif %}
+</div>
+
+<div class="container2 color_format2">
+  <h1 class="central header_style2">Contact us</h1>
+  <form action="{% url 'fiiecool:Home' %}" autocomplete="on" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="container3 clearfix">
+      <div class="container3 col-25 left-space2">
+        <label for="{{ field.id_for_label }}">{{ field.label}}</label>
+      </div>
+      <div class="container3 col-75 right-space2">
+        {{field}}
+      </div>
+    </div>
+    {% endfor %}
+    <div class="container3 side-space_submit">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+</div>
+{% endblock %}
+{{ block.super }}

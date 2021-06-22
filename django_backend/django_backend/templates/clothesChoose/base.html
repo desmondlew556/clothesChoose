@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+  <!-- Stuff to add: charitable undertakings -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174163056-1"></script>
+  <!--to import jQuery library-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-174163056-1');
+  </script>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!--To avoid blue links on phones-->
+  <meta name="format-detection" content="telephone=no">
+  <!--Bootstrap CSS-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <!--Google font API -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+  <script src="https://kit.fontawesome.com/8bdb957246.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <!--Link to stylesheet css-->
+  <link rel="stylesheet" type="text/css" href="{% static 'fc_website/styles.css' %}" />
+
+  <title>{% block title %}Fiiecool: air conditioning for you{% endblock %}</title>
+
+  <!--Other configuration data for rendering or searching the website-->
+  {% block tags %}
+  <meta name="keywords" content="Fiiecool, experts, specialise, specialising, established, air conditioning, central air conditioning, air conditioner, air-con, aircon, air con, HVAC, piping, jacketing, ducting,
+   fire rated enclosure, ventilation system, fresh air and exhaust, design and build, partition, consultation" />
+  <meta name="description" content="Fiiecool Engineering Services has been involved in the central air conditioning market in Singapore since 1995, specialising in installation and maintenance services." />
+  {% endblock %}
+  <meta name="author" content="Dalen Lew and Desmond Lew" />
+
+  <!--responsive meta tag for proper rendering in mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  {% block styling %}
+  
+  {% endblock %}
+</head>
+
+<body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<!--navigation bar with style defined by "navbar_background"-->
+<!--email button-->
+{% block navbar %}
+<div role="navigation" class="top">
+  <div class="bar" id="myNavbar">
+    <a class="bar-item btn btn_color hover-yellow hide-medium hide-large right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+      <i class="fas fa-bars"></i>
+    </a>
+    {% for title in web_titles %}
+      {% if title.header == "Home" %}
+        <a href="{% url 'fiiecool:'|add:title.header %}" class="bar-item btn btn_color hide-small hover-yellow active">{{ title.header }}</a>
+      {% else %}
+        <a href="{% url 'fiiecool:'|add:title.header %}" class="bar-item btn btn_color hide-small hover-yellow">{{ title.header }}</a>
+      {% endif %}
+    {% endfor%}
+  </div>
+  <div id="nav" class="bar-block hide hide-medium hide-large">
+    {% for title in web_titles %}
+      {% if title.header == "Home" %}
+        <a href="{% url 'fiiecool:'|add:title.header %}" class="bar-item btn nav_color1 hover-yellow active" onclick="toggleFunction()">{{ title.header }}</a>
+      {% else %}
+        <a href="{% url 'fiiecool:'|add:title.header %}" class="bar-item btn nav_color1 hover-yellow" onclick="toggleFunction()">{{ title.header }}</a>
+      {% endif %}
+    {% endfor%}
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+<footer>
+  <row class="col-s-12 container3 light-red">
+    <div class="col-s-6 container4">
+      <div class="col_fixed-size4">
+        <div class="col-s-12">
+          <a href="{% url 'fiiecool:Terms of use' %}" class="btn2 dark-gold hover-yellow3">Terms of use</a>
+        </div>
+        <div class="col-s-12">
+          <a href="{% url 'fiiecool:Privacy policy' %}" class="btn2 dark-gold hover-yellow3">Privacy policy</a>
+        </div>
+      </div>
+      <div class="col_fixed-size4">
+        <div class="col-s-12">
+          <a href="{% url 'fiiecool:Security Issue' %}" class="btn2 dark-gold hover-yellow3">Report security issue</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-s-6 container5">
+      <p class="col-s-12 btn3 dark-gold">Copyright &#169; 2021, Fiiecool Engineering Services</p>
+    </div>
+  </row>
+</footer>
+{% endblock%}
+
+</div>
+
+<script>
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    var navitem = document.getElementsByClassName("hover-yellow");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      navbar.className = "bar" + " animate-top" + " nav_color1";
+      var i;
+      for(i=0;i<navitem.length;i++){
+        navitem[i].className += " hover-yellow2";
+      }
+    }
+    else {
+        navbar.className = navbar.className.replace(" animate-top nav_color1", "");
+        var i;
+        for(i=0;i<navitem.length;i++){
+          if (navitem[i].className.indexOf("hover-yellow2") != -1) {
+            navitem[i].className = navitem[i].className.replace(" hover-yellow2", "");
+          }
+        }
+    }
+}
+// Used to toggle the menu on small screens when cli/cking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("nav");
+    if (x.className.indexOf("show") == -1) {
+        x.className += " show";
+    } else {
+        x.className = x.className.replace(" show", "");
+    }
+}
+//list of variables used:
+//base.html: i,x
+</script>
+</body>
+</html>
