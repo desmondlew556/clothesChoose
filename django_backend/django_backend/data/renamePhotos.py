@@ -71,7 +71,7 @@ def add_apparel_photos():
     #photos origin directory
     saved_photos_path = "images/new_apparel_photos"
     #destination directory
-    destination_photo_folder = "../../../react-frontend/src/static/clothesChoose/images/apparel"
+    destination_photo_folder = "/../../../react-frontend/public/images/apparel"
     separator = "/"
     #list of tuples to add
     default_key_value = "Not present"
@@ -93,12 +93,18 @@ def add_apparel_photos():
             current_path = saved_photos_path+category_path_extension
             destination_category_folder = os.getcwd()+destination_photo_folder+separator+category
             #Create directory for clothing category if it does not exist in the destination directory
+            print(category)
+            #print(os.listdir(destination_category_folder))
             if(not os.path.exists(destination_category_folder)):
-                print("creating directory",folder)
+                print("creating directory",category)
+                
                 os.mkdir(destination_category_folder)
             else:
                 print("already exists")
+            print("HI")
+            print(os.listdir(current_path))
             for folder in os.listdir(current_path):
+                print(folder)
                 #ignore hidden files (e.g. .DStore that are not directories)
                 if(is_hidden(folder)==True):
                     continue
@@ -130,29 +136,36 @@ def add_apparel_photos():
                 folder_path_extension = category_path_extension+separator+folder
                 current_folder_path = current_path+separator+folder
                 for file in os.listdir(current_folder_path):
+                    if(is_hidden(file)==True):
+                        continue
                     file_path_extension = folder_path_extension+separator+file
                     origin_file_path = os.path.abspath(os.getcwd())+separator+current_folder_path+separator+file
                     destination_file_path = os.getcwd()+destination_photo_folder+file_path_extension
+                    image_relative_path = "/images/apparel/" + category+separator+folder + separator + file
+                    print(image_relative_path)
                     #shift photos that are read to destination directory
                     os.rename(origin_file_path,destination_file_path)
                     #save garment entry and characteristics for mass insertion after loops.
-                    garment_entries[category].append(destination_file_path)
-                    garment_characteristics[destination_file_path] = [characteristics_dict[folder],folder]
+                    garment_entries[category].append(image_relative_path)
+                    garment_characteristics[image_relative_path] = [characteristics_dict[folder],folder]
                     print(origin_file_path)
                     print(destination_file_path)
                     print("\n\n")
         #find and add characteristics object that have not been created
         characteristics_set = set(characteristics_list)
         unique_characteristics_list = list(characteristics_set)
+        print(unique_characteristics_list)
         for characteristic in unique_characteristics_list:
             if(not Characteristics.objects.filter(characteristic_name=characteristic).exists()):
                 Characteristics.objects.create(characteristic_name=characteristic)
+                print("name %s"%characteristic)
         #add garment photo entries into corresponding databases
         for category, garments_photo_links in garment_entries.items():
             if category.lower() == "men":
                 for photo_link in garments_photo_links:
                     entry = GarmentMen.objects.create(image_path = photo_link)
                     for characteristic in garment_characteristics[photo_link]:
+                        print("name %s"%characteristic)
                         entry.characteristics.add(Characteristics.objects.get(characteristic_name=characteristic))
             elif category.lower() == "women":
                 for photo_link in garments_photo_links:
@@ -169,8 +182,10 @@ def add_apparel_photos():
                     for characteristic in garment_characteristics[photo_link]:
                         entry.characteristics.add(Characteristics.objects.get(characteristic_name=characteristic))
     except NotADirectoryError:
+        print("error")
         pass
     except FileNotFoundError:
+        print("error")
         pass
 
 

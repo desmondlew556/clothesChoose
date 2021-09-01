@@ -2,6 +2,8 @@ from datetime import datetime
 from datetime import timezone
 import pytz
 
+from collections import defaultdict
+
 def convert_date(date_time_str):
     ''' 
     Converts datetime with format "May 17 04:47:50 2021 GMT" to python datetime object and finds difference between the two.
@@ -60,7 +62,16 @@ def convert_date_any_timezone(date_time_str):
     minutes_diff = datetime_difference_in_timedelta.seconds%3600//60
     return [date_time_obj,datetime_difference,days_diff,hours_diff,minutes_diff]
 
-date_time_str = "Jun 09 21:19:00 2021 HST"
-date_time_fields = convert_date_any_timezone(date_time_str)
-print("date_time_str in datetime format: " + date_time_fields[0].strftime("%Y/%m/%d, %H:%M:%S"))
-print(date_time_fields[1]+" by "+str(date_time_fields[2])+" days "+str(date_time_fields[3])+" hours "+ str(date_time_fields[4])+" minutes.")
+def getDateDifference():
+    date_time_str = "Jun 09 21:19:00 2021 HST"
+    date_time_fields = convert_date_any_timezone(date_time_str)
+    print("date_time_str in datetime format: " + date_time_fields[0].strftime("%Y/%m/%d, %H:%M:%S"))
+    print(date_time_fields[1]+" by "+str(date_time_fields[2])+" days "+str(date_time_fields[3])+" hours "+ str(date_time_fields[4])+" minutes.")
+
+clothes_score_index = defaultdict(lambda: "Not present")
+print(clothes_score_index["garment_id"])
+{
+            "winning_clothes_id":2,
+            "game_rankings":{"1": 2, "2": 1, "3": 8, "4": 5, "5": 3, "6": 7, "19": 6, "11": 4, "14": 10, "53": 9},
+            "user_gender":"women"
+}

@@ -1,0 +1,28 @@
+ERROR:django.request:Internal Server Error: /api/garment/summary_rankings/
+Traceback (most recent call last):
+  File "/Users/desmondlewjiangyang/apps/clothesChoose/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/Users/desmondlewjiangyang/apps/clothesChoose/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/desmondlewjiangyang/apps/clothesChoose/venv/lib/python3.8/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/desmondlewjiangyang/apps/clothesChoose/venv/lib/python3.8/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/desmondlewjiangyang/apps/clothesChoose/venv/lib/python3.8/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/desmondlewjiangyang/apps/clothesChoose/venv/lib/python3.8/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/desmondlewjiangyang/apps/clothesChoose/venv/lib/python3.8/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/desmondlewjiangyang/apps/clothesChoose/venv/lib/python3.8/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/desmondlewjiangyang/apps/clothesChoose/django_backend/django_backend/views.py", line 91, in post
+    logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+  File "/Users/desmondlewjiangyang/.pyenv/versions/3.8.5/lib/python3.8/logging/__init__.py", line 1997, in basicConfig
+    raise ValueError('Unrecognised argument(s): %s' % keys)
+ValueError: Unrecognised argument(s): encoding
+INFO:django.utils.autoreload:/Users/desmondlewjiangyang/apps/clothesChoose/django_backend/django_backend/views.py changed, reloading.
+DEBUG:asyncio:Using selector: KqueueSelector
+DEBUG:root:{'Content-Length': '35', 'Content-Type': 'application/json', 'Host': '127.0.0.1:8000', 'Connection': 'keep-alive', 'Pragma': 'no-cache', 'Cache-Control': 'no-cache', 'Sec-Ch-Ua': '" Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"', 'Sec-Ch-Ua-Mobile': '?0', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36', 'Accept': '*/*', 'Origin': 'http://localhost:3000', 'Sec-Fetch-Site': 'cross-site', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://localhost:3000/', 'Accept-Encoding': 'gzip, deflate, br', 'Accept-Language': 'en-US,en;q=0.9'}
+INFO:django.utils.autoreload:/Users/desmondlewjiangyang/apps/clothesChoose/django_backend/django_backend/views.py changed, reloading.
+DEBUG:asyncio:Using selector: KqueueSelector
